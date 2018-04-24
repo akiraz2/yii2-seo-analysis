@@ -14,6 +14,7 @@ use yii\behaviors\BlameableBehavior;
  * @property string $name
  * @property string $base_url
  * @property integer $ping
+ * @property integer $ping_last_date
  * @property integer $reindex
  * @property string $params
  * @property integer $status
@@ -53,7 +54,7 @@ abstract class SiteProject extends \yii\db\ActiveRecord
     {
         return [
             [
-                'class' => BlameableBehavior::className(),
+                'class' => BlameableBehavior::class,
                 'createdByAttribute' => 'user_id',
                 'updatedByAttribute' => false,
             ],
@@ -67,9 +68,8 @@ abstract class SiteProject extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'base_url'], 'required'],
-            [['ping', 'reindex'], 'integer'],
+            [['ping', 'reindex', 'ping_last_date'], 'integer'],
             [['params'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
             [['name', 'base_url'], 'string', 'max' => 255],
             [['status'], 'string', 'max' => 1]
         ];

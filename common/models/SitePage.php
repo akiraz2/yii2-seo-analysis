@@ -9,12 +9,16 @@ use Yii;
  *
  * @property int $id
  * @property int $site_snapshot_id
+ * @property int $request_time
  * @property string $url
+ * @property string $canonical
  * @property string $status_code
  * @property string $title
  * @property string $meta_description
  * @property string $meta_keyword
  * @property string $tag_h1
+ * @property int $og_main
+ * @property int $og_option
  * @property string $body
  * @property string $created_at
  *
@@ -48,14 +52,14 @@ class SitePage extends \yii\db\ActiveRecord
             [['site_snapshot_id', 'url'], 'required'],
             [['site_snapshot_id'], 'integer'],
             [['body'], 'string'],
-            [['url', 'title', 'meta_keyword', 'tag_h1'], 'string', 'max' => 255],
+            [['url', 'title', 'meta_keyword', 'tag_h1', 'canonical'], 'string', 'max' => 255],
             [['meta_description'], 'string', 'max' => 512],
-            [['status_code'], 'integer'],
+            [['status_code', 'request_time', 'og_main', 'og_option'], 'integer'],
             [
                 ['site_snapshot_id'],
                 'exist',
                 'skipOnError' => true,
-                'targetClass' => SiteSnapshot::className(),
+                'targetClass' => SiteSnapshot::class,
                 'targetAttribute' => ['site_snapshot_id' => 'id']
             ],
         ];
@@ -84,6 +88,6 @@ class SitePage extends \yii\db\ActiveRecord
      */
     public function getSiteSnapshot()
     {
-        return $this->hasOne(SiteSnapshot::className(), ['id' => 'site_snapshot_id']);
+        return $this->hasOne(SiteSnapshot::class, ['id' => 'site_snapshot_id']);
     }
 }

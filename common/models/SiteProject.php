@@ -2,8 +2,8 @@
 
 namespace common\models;
 
+use common\models\base\SiteProject as BaseSiteProject;
 use Yii;
-use \common\models\base\SiteProject as BaseSiteProject;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -29,6 +29,17 @@ class SiteProject extends BaseSiteProject
             [
                 # custom validation rules
                 [['ping', 'reindex'], 'default', 'value' => 0],
+                [
+                    'ping',
+                    'integer',
+                    'min' => Yii::$app->params['pingMinDelay'],
+                    'when' => function ($model) {
+                        return $model->ping > 0;
+                    },
+                    'whenClient' => "function (attribute, value) {
+                        return value > 0;
+                    }"
+                ],
             ]
         );
     }

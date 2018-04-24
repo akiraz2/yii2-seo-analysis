@@ -35,12 +35,13 @@ class SiteLog extends \yii\db\ActiveRecord
         return new SiteLogQuery(get_called_class());
     }
 
-    public static function create($category, $message, $site_snapshot_id = null)
+    public static function create($category, $message, $site_snapshot_id = null, $site_project_id = null)
     {
         $model = new SiteLog();
         $model->category = $category;
         $model->message = $message;
         $model->site_snapshot_id = $site_snapshot_id;
+        $model->site_project_id=$site_project_id;
         $model->save();
     }
 
