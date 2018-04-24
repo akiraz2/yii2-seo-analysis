@@ -2,20 +2,37 @@
 
 use yii\helpers\Html;
 
+/**
+* @var yii\web\View $this
+* @var common\models\SiteSnapshot $model
+*/
 
-/* @var $this yii\web\View */
-/* @var $model common\models\SiteSnapshot */
-
-$this->title = Yii::t('app-model', 'Create Site Snapshot');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app-model', 'Site Snapshots'), 'url' => ['index']];
+$this->title = Yii::t('app-backend', 'Site Snapshot');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app-backend', 'Site Snapshots'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-snapshot-create">
+<div class="giiant-crud site-snapshot-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Yii::t('app-backend', 'Site Snapshot') ?>
+        <small>
+                        <?= $model->name ?>
+        </small>
+    </h1>
+
+    <div class="clearfix crud-navigation">
+        <div class="pull-left">
+            <?=             Html::a(
+            Yii::t('app-model', 'Cancel'),
+            \yii\helpers\Url::previous(),
+            ['class' => 'btn btn-default']) ?>
+        </div>
+    </div>
+
+    <hr />
 
     <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    'model' => $model,
+    ]); ?>
 
 </div>

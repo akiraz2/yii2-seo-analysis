@@ -2,22 +2,33 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\SiteSnapshot */
+/**
+* @var yii\web\View $this
+* @var common\models\SiteSnapshot $model
+*/
 
-$this->title = Yii::t('app-model', 'Update Site Snapshot: {nameAttribute}', [
-    'nameAttribute' => $model->name,
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app-model', 'Site Snapshots'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app-model', 'Update');
+$this->title = Yii::t('app-backend', 'Site Snapshot');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app-backend', 'Site Snapshot'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = Yii::t('app-model', 'Edit');
 ?>
-<div class="site-snapshot-update">
+<div class="giiant-crud site-snapshot-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Yii::t('app-backend', 'Site Snapshot') ?>
+        <small>
+                        <?= $model->name ?>
+        </small>
+    </h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <div class="crud-navigation">
+        <?= Html::a('<span class="glyphicon glyphicon-file"></span> ' . Yii::t('app-model', 'View'), ['view', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+    </div>
+
+    <hr />
+
+    <?php echo $this->render('_form', [
+    'model' => $model,
+    ]); ?>
 
 </div>

@@ -3,25 +3,43 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\SiteSnapshotSearch */
-/* @var $form yii\widgets\ActiveForm */
+/**
+* @var yii\web\View $this
+* @var backend\models\SiteSnapshotSearch $model
+* @var yii\widgets\ActiveForm $form
+*/
 ?>
 
 <div class="site-snapshot-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
+    'action' => ['index'],
+    'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    		<?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'name') ?>
+		<?= $form->field($model, 'user_id') ?>
 
-    <?= $form->field($model, 'start_url') ?>
+		<?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'created_at') ?>
+		<?= $form->field($model, 'start_url') ?>
+
+		<?= $form->field($model, 'count_pages') ?>
+
+		<?php // echo $form->field($model, 'robots_txt') ?>
+
+		<?php // echo $form->field($model, 'sitemap_xml') ?>
+
+		<?php // echo $form->field($model, 'error404') ?>
+
+		<?php // echo $form->field($model, 'error500') ?>
+
+		<?php // echo $form->field($model, 'redirect300') ?>
+
+		<?php // echo $form->field($model, 'duplicates') ?>
+
+		<?php // echo $form->field($model, 'created_at') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app-model', 'Search'), ['class' => 'btn btn-primary']) ?>

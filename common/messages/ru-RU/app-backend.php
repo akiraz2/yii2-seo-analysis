@@ -17,6 +17,13 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Error: {code}, Url: {url}' => '',
+    'Redirect: {code}, Url: {url}' => '',
+    'Site Page' => '',
+    'Site Snapshot' => '',
+    'Site Snapshots' => '',
+    'SiteSnapshot' => '',
+    'User' => '',
     'Admin' => 'Административное',
     'Dashboard' => 'Панель управления',
     'General' => 'Главное',

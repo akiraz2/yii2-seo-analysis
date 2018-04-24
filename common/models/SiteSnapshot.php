@@ -14,7 +14,13 @@ use yii\db\ActiveRecord;
  * @property string $name
  * @property string $start_url
  * @property string $created_at
- *
+ * @property int $count_pages
+ * @property string $robots_txt
+ * @property string $sitemap_xml
+ * @property int $error404
+ * @property int $error500
+ * @property int $redirect300
+ * @property int $duplicates
  * @property SitePage[] $sitePages
  * @property User $user
  */
@@ -53,11 +59,11 @@ class SiteSnapshot extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'name', 'start_url'], 'required'],
-            [['user_id'], 'integer'],
+            [['user_id', 'count_pages', 'error404', 'error500', 'redirect300', 'duplicates'], 'integer'],
             [['created_at'], 'safe'],
             [['name'], 'string', 'max' => 100],
-            [['start_url'], 'string', 'max' => 255],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['start_url', 'sitemap_xml'], 'string', 'max' => 255],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -71,6 +77,13 @@ class SiteSnapshot extends \yii\db\ActiveRecord
             'user_id' => Yii::t('app-model', 'User ID'),
             'name' => Yii::t('app-model', 'Name'),
             'start_url' => Yii::t('app-model', 'Start Url'),
+            'count_pages' => Yii::t('app-model', 'Count Pages'),
+            'robots_txt' => Yii::t('app-model', 'Robots Txt'),
+            'sitemap_xml' => Yii::t('app-model', 'Sitemap Xml'),
+            'error404' => Yii::t('app-model', 'Error404'),
+            'error500' => Yii::t('app-model', 'Error500'),
+            'redirect300' => Yii::t('app-model', 'Redirect300'),
+            'duplicates' => Yii::t('app-model', 'Duplicates'),
             'created_at' => Yii::t('app-model', 'Created At'),
         ];
     }
