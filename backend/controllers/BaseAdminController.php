@@ -15,12 +15,14 @@ use yii\filters\VerbFilter;
 use dektrium\user\filters\AccessRule;
 use yii\filters\AccessControl;
 
-class BaseAdminController extends Controller {
+class BaseAdminController extends Controller
+{
 
     /**
      * @inheritdoc
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'verbs' => [
                 'class' => VerbFilter::class,

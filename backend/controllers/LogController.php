@@ -13,13 +13,15 @@ use yii\filters\VerbFilter;
 /**
  * LogController implements the CRUD actions for Log model.
  */
-class LogController extends BaseAdminController {
+class LogController extends BaseAdminController
+{
 
     /**
      * Lists all Log models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $searchModel = new LogSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         if (strcasecmp(Yii::$app->request->method, 'delete') == 0) {
@@ -30,8 +32,8 @@ class LogController extends BaseAdminController {
             'defaultOrder' => ['log_time' => SORT_DESC]
         ];
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -40,9 +42,10 @@ class LogController extends BaseAdminController {
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         return $this->render('view', [
-                    'model' => $this->findModel($id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -52,7 +55,8 @@ class LogController extends BaseAdminController {
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -65,7 +69,8 @@ class LogController extends BaseAdminController {
      * @return Log the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id) {
+    protected function findModel($id)
+    {
         if (($model = Log::findOne($id)) !== null) {
             return $model;
         } else {

@@ -3,11 +3,11 @@
 namespace common\models;
 
 /**
- * This is the ActiveQuery class for [[SiteSnapshot]].
+ * This is the ActiveQuery class for [[SiteProject]].
  *
- * @see SiteSnapshot
+ * @see SiteProject
  */
-class SiteSnapshotQuery extends \yii\db\ActiveQuery
+class SiteProjectQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -17,7 +17,7 @@ class SiteSnapshotQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return SiteSnapshot[]|array
+     * @return SiteProject[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class SiteSnapshotQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return SiteSnapshot|array|null
+     * @return SiteProject|array|null
      */
     public function one($db = null)
     {

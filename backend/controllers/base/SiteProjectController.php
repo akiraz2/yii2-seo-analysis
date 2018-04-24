@@ -4,8 +4,8 @@
 
 namespace backend\controllers\base;
 
-use common\models\SiteSnapshot;
-use backend\models\SiteSnapshotSearch;
+use common\models\SiteProject;
+use backend\models\SiteProject as SiteProjectSearch;
 use backend\controllers\BaseAdminController;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -13,9 +13,9 @@ use yii\filters\AccessControl;
 use dmstr\bootstrap\Tabs;
 
 /**
- * SiteSnapshotController implements the CRUD actions for SiteSnapshot model.
+ * SiteProjectController implements the CRUD actions for SiteProject model.
  */
-class SiteSnapshotController extends BaseAdminController
+class SiteProjectController extends BaseAdminController
 {
 
 
@@ -27,12 +27,12 @@ class SiteSnapshotController extends BaseAdminController
 
 
     /**
-     * Lists all SiteSnapshot models.
+     * Lists all SiteProject models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SiteSnapshotSearch;
+        $searchModel = new SiteProjectSearch;
         $dataProvider = $searchModel->search($_GET);
 
         Tabs::clearLocalStorage();
@@ -47,7 +47,7 @@ class SiteSnapshotController extends BaseAdminController
     }
 
     /**
-     * Displays a single SiteSnapshot model.
+     * Displays a single SiteProject model.
      * @param integer $id
      *
      * @return mixed
@@ -64,13 +64,13 @@ class SiteSnapshotController extends BaseAdminController
     }
 
     /**
-     * Creates a new SiteSnapshot model.
+     * Creates a new SiteProject model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new SiteSnapshot;
+        $model = new SiteProject;
 
         try {
             if ($model->load($_POST) && $model->save()) {
@@ -86,7 +86,7 @@ class SiteSnapshotController extends BaseAdminController
     }
 
     /**
-     * Updates an existing SiteSnapshot model.
+     * Updates an existing SiteProject model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -105,7 +105,7 @@ class SiteSnapshotController extends BaseAdminController
     }
 
     /**
-     * Deletes an existing SiteSnapshot model.
+     * Deletes an existing SiteProject model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -136,15 +136,15 @@ class SiteSnapshotController extends BaseAdminController
     }
 
     /**
-     * Finds the SiteSnapshot model based on its primary key value.
+     * Finds the SiteProject model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return SiteSnapshot the loaded model
+     * @return SiteProject the loaded model
      * @throws HttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = SiteSnapshot::findOne($id)) !== null) {
+        if (($model = SiteProject::findOne($id)) !== null) {
             return $model;
         } else {
             throw new HttpException(404, 'The requested page does not exist.');

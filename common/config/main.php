@@ -52,7 +52,9 @@ return [
                 ],
                 'giiant' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    //'basePath' => '@common/messages',
+                ],
+                'cruds' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
                 ],
             ],
         ],

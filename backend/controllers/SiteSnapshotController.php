@@ -114,22 +114,6 @@ class SiteSnapshotController extends BaseAdminController
     }
 
     /**
-     * Finds the SiteSnapshot model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return SiteSnapshot the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = SiteSnapshot::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException(Yii::t('app-model', 'The requested page does not exist.'));
-    }
-
-    /**
      * @param $id
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
@@ -146,5 +130,21 @@ class SiteSnapshotController extends BaseAdminController
         Yii::$app->session->setFlash('success', 'Добавлено в очередь');
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the SiteSnapshot model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return SiteSnapshot the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = SiteSnapshot::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException(Yii::t('app-model', 'The requested page does not exist.'));
     }
 }

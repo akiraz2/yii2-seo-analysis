@@ -40,9 +40,9 @@ class EmailForm extends \yii\db\ActiveRecord
         return [
             [['user_id', 'status'], 'integer'],
             [['textBody'], 'required'],
-            [['textBody'], 'string'],  
-            [['setToEmail','setFromEmail'], 'email'],
-            [['setToName','setFromName', 'subject'], 'string', 'max' => 255],
+            [['textBody'], 'string'],
+            [['setToEmail', 'setFromEmail'], 'email'],
+            [['setToName', 'setFromName', 'subject'], 'string', 'max' => 255],
         ];
     }
 

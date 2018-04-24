@@ -18,7 +18,7 @@ use yii\web\NotFoundHttpException;
  * EmailFormController implements the CRUD actions for EmailForm model.
  */
 class EmailFormController extends BaseAdminController
-{   
+{
 
     /**
      * Lists all EmailForm models.

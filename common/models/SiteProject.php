@@ -3,18 +3,15 @@
 namespace common\models;
 
 use Yii;
-use \common\models\base\SiteSnapshot as BaseSiteSnapshot;
+use \common\models\base\SiteProject as BaseSiteProject;
 use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "site_snapshot".
+ * This is the model class for table "site_project".
  */
-class SiteSnapshot extends BaseSiteSnapshot
+class SiteProject extends BaseSiteProject
 {
 
-    /**
-     * @return array
-     */
     public function behaviors()
     {
         return ArrayHelper::merge(
@@ -25,15 +22,13 @@ class SiteSnapshot extends BaseSiteSnapshot
         );
     }
 
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return ArrayHelper::merge(
             parent::rules(),
             [
                 # custom validation rules
+                [['ping', 'reindex'], 'default', 'value' => 0],
             ]
         );
     }

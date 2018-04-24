@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'log_time',
                 'format' => 'datetime',
                 'value' => function ($model) {
-                    return (int) $model->log_time;
+                    return (int)$model->log_time;
                 }
             ],
             [

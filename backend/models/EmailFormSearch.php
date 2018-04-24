@@ -25,7 +25,20 @@ class EmailFormSearch extends EmailForm
     {
         return [
             [['id', 'user_id', 'status'], 'integer'],
-            [['setToEmail', 'setToName', 'setFromEmail', 'setFromName', 'subject', 'textBody', 'created_at', 'status_text', 'send_at'], 'safe'],
+            [
+                [
+                    'setToEmail',
+                    'setToName',
+                    'setFromEmail',
+                    'setFromName',
+                    'subject',
+                    'textBody',
+                    'created_at',
+                    'status_text',
+                    'send_at'
+                ],
+                'safe'
+            ],
         ];
     }
 

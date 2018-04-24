@@ -47,8 +47,9 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                         <img src="/img/128x128.png" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
-                        <span><?= \Yii::t('app-backend', 'Welcome');?>,</span>
-                        <h2><?= (Yii::$app->user->isGuest)? \Yii::t('app-backend', 'Guest'):Yii::$app->user->identity->username; ?></h2>
+                        <span><?= \Yii::t('app-backend', 'Welcome'); ?>,</span>
+                        <h2><?= (Yii::$app->user->isGuest) ? \Yii::t('app-backend',
+                                'Guest') : Yii::$app->user->identity->username; ?></h2>
                     </div>
                 </div>
                 <!-- /menu prile quick info -->
@@ -59,16 +60,37 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                     <div class="menu_section">
-                        <h3><?= \Yii::t('app-backend', 'General');?></h3>
+                        <h3><?= \Yii::t('app-backend', 'General'); ?></h3>
                         <?=
                         \yiister\gentelella\widgets\Menu::widget(
                             [
                                 "items" => [
                                     ["label" => \Yii::t('app-backend', 'Dashboard'), "url" => "/", "icon" => "home"],
-                                    ["label" => \Yii::t('app-model', 'Site Page'), "url" => ["/site-page/index"], "icon" => "users"],
-                                    ["label" => \Yii::t('app-model', 'Site Snapshot'), "url" => ["/site-snapshot/index"], "icon" => "users"],
-                                    ["label" => \Yii::t('app-model', 'Users'), "url" => ["/user/admin"], "icon" => "users"],
-                                    ["label" => \Yii::t('app-model', 'Email Form'), "url" => ["/email-form/index"], "icon" => "envelope"],
+                                    [
+                                        "label" => \Yii::t('app-model', 'Site Project'),
+                                        "url" => ["/site-project/index"],
+                                        "icon" => "users"
+                                    ],
+                                    [
+                                        "label" => \Yii::t('app-model', 'Site Snapshot'),
+                                        "url" => ["/site-snapshot/index"],
+                                        "icon" => "users"
+                                    ],
+                                    [
+                                        "label" => \Yii::t('app-model', 'Site Page'),
+                                        "url" => ["/site-page/index"],
+                                        "icon" => "users"
+                                    ],
+                                    [
+                                        "label" => \Yii::t('app-model', 'Users'),
+                                        "url" => ["/user/admin"],
+                                        "icon" => "users"
+                                    ],
+                                    [
+                                        "label" => \Yii::t('app-model', 'Email Form'),
+                                        "url" => ["/email-form/index"],
+                                        "icon" => "envelope"
+                                    ],
                                     [
                                         "label" => \Yii::t('app-backend', 'Admin'),
                                         "url" => "#",
@@ -127,16 +149,19 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="/img/128x128.png" alt=""><?= (Yii::$app->user->isGuest)? \Yii::t('app-backend', 'Guest'):Yii::$app->user->identity->username; ?>
+                                <img src="/img/128x128.png"
+                                     alt=""><?= (Yii::$app->user->isGuest) ? \Yii::t('app-backend',
+                                    'Guest') : Yii::$app->user->identity->username; ?>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="/user/admin/update-profile?id=1"><?= \Yii::t('app-model', 'Profile');?></a>
+                                <li><a href="/user/admin/update-profile?id=1"><?= \Yii::t('app-model',
+                                            'Profile'); ?></a>
                                 </li>
                                 <li>
                                     <a href="/user/security/logout" data-method="post">
                                         <i class="fa fa-sign-out pull-right"></i>
-                                        <?= \Yii::t('app-model', 'Log out');?>
+                                        <?= \Yii::t('app-model', 'Log out'); ?>
                                     </a>
                                 </li>
                             </ul>

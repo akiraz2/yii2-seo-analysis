@@ -32,6 +32,15 @@ class SitePage extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
+     * @return SitePageQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new SitePageQuery(get_called_class());
+    }
+
+    /**
+     * @inheritdoc
      */
     public function rules()
     {
@@ -42,7 +51,13 @@ class SitePage extends \yii\db\ActiveRecord
             [['url', 'title', 'meta_keyword', 'tag_h1'], 'string', 'max' => 255],
             [['meta_description'], 'string', 'max' => 512],
             [['status_code'], 'integer'],
-            [['site_snapshot_id'], 'exist', 'skipOnError' => true, 'targetClass' => SiteSnapshot::className(), 'targetAttribute' => ['site_snapshot_id' => 'id']],
+            [
+                ['site_snapshot_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => SiteSnapshot::className(),
+                'targetAttribute' => ['site_snapshot_id' => 'id']
+            ],
         ];
     }
 
@@ -70,14 +85,5 @@ class SitePage extends \yii\db\ActiveRecord
     public function getSiteSnapshot()
     {
         return $this->hasOne(SiteSnapshot::className(), ['id' => 'site_snapshot_id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return SitePageQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new SitePageQuery(get_called_class());
     }
 }

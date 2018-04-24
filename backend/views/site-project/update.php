@@ -4,18 +4,18 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var common\models\SiteSnapshot $model
+ * @var common\models\SiteProject $model
  */
 
-$this->title = Yii::t('app-backend', 'Site Snapshot');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app-backend', 'Site Snapshot'), 'url' => ['index']];
+$this->title = Yii::t('app-backend', 'Site Project');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app-backend', 'Site Project'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app-model', 'Edit');
 ?>
-<div class="giiant-crud site-snapshot-update">
+<div class="giiant-crud site-project-update">
 
     <h1>
-        <?= Yii::t('app-backend', 'Site Snapshot') ?>
+        <?= Yii::t('app-backend', 'Site Project') ?>
         <small>
             <?= $model->name ?>
         </small>

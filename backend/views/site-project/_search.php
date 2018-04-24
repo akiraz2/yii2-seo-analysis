@@ -5,12 +5,12 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var backend\models\SiteSnapshotSearch $model
+ * @var backend\models\SiteProject $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
 
-<div class="site-snapshot-search">
+<div class="site-project-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,29 +19,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'site_project_id') ?>
-
     <?= $form->field($model, 'user_id') ?>
 
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'start_url') ?>
+    <?= $form->field($model, 'base_url') ?>
 
-    <?php // echo $form->field($model, 'count_pages') ?>
+    <?= $form->field($model, 'ping') ?>
 
-    <?php // echo $form->field($model, 'robots_txt') ?>
+    <?php // echo $form->field($model, 'reindex') ?>
 
-    <?php // echo $form->field($model, 'sitemap_xml') ?>
+    <?php // echo $form->field($model, 'params') ?>
 
-    <?php // echo $form->field($model, 'error404') ?>
-
-    <?php // echo $form->field($model, 'error500') ?>
-
-    <?php // echo $form->field($model, 'redirect300') ?>
-
-    <?php // echo $form->field($model, 'duplicates') ?>
+    <?php // echo $form->field($model, 'status') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
+
+    <?php // echo $form->field($model, 'updated_at') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app-model', 'Search'), ['class' => 'btn btn-primary']) ?>

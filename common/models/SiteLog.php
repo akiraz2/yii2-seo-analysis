@@ -28,6 +28,24 @@ class SiteLog extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
+     * @return SiteLogQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new SiteLogQuery(get_called_class());
+    }
+
+    public static function create($category, $message, $site_snapshot_id = null)
+    {
+        $model = new SiteLog();
+        $model->category = $category;
+        $model->message = $message;
+        $model->site_snapshot_id = $site_snapshot_id;
+        $model->save();
+    }
+
+    /**
+     * @inheritdoc
      */
     public function rules()
     {
@@ -36,7 +54,13 @@ class SiteLog extends \yii\db\ActiveRecord
             [['message'], 'required'],
             [['message', 'category'], 'string'],
             [['created_at'], 'safe'],
-            [['site_snapshot_id'], 'exist', 'skipOnError' => true, 'targetClass' => SiteSnapshot::class, 'targetAttribute' => ['site_snapshot_id' => 'id']],
+            [
+                ['site_snapshot_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => SiteSnapshot::class,
+                'targetAttribute' => ['site_snapshot_id' => 'id']
+            ],
         ];
     }
 
@@ -62,21 +86,4 @@ class SiteLog extends \yii\db\ActiveRecord
     {
         return $this->hasOne(SiteSnapshot::class, ['id' => 'site_snapshot_id']);
     }
-
-    /**
-     * @inheritdoc
-     * @return SiteLogQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new SiteLogQuery(get_called_class());
-    }
-
-    public static function create($category, $message, $site_snapshot_id=null) {
-        $model= new SiteLog();
-        $model->category= $category;
-        $model->message= $message;
-        $model->site_snapshot_id= $site_snapshot_id;
-        $model->save();
-    }
- }
+}

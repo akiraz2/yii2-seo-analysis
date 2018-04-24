@@ -64,7 +64,12 @@ class SiteScraper extends Component
     {
         $this->checkConfig();
         $this->saveRobotsTxt();
-        $this->snapshot->updateAttributes(['count_pages' => 0, 'error404' => 0, 'error500' => 0, 'redirect300' =>0]);//обнуляем перед стартом
+        $this->snapshot->updateAttributes([
+            'count_pages' => 0,
+            'error404' => 0,
+            'error500' => 0,
+            'redirect300' => 0
+        ]);//обнуляем перед стартом
         $this->scrapePage($this->startUrl);
         $this->snapshot->updateAttributes(['count_pages' => $this->countPages]);//записываем конечное число страниц
     }
@@ -156,7 +161,7 @@ class SiteScraper extends Component
      * Update site-snapshot`s counters error 404, 500, 300
      * @param string $url
      */
-    private function updateStatusCode(string $url='')
+    private function updateStatusCode(string $url = '')
     {
 
         if ($this->client->getResponse()->getStatus() == 404) {
@@ -245,9 +250,10 @@ class SiteScraper extends Component
      * Periodic update counter of pages
      *
      */
-    private function updateCountPages() {
+    private function updateCountPages()
+    {
         $this->countPages++;
-        if($this->countPages%10==0) {
+        if ($this->countPages % 10 == 0) {
             $this->snapshot->updateAttributes(['count_pages' => $this->countPages]);
         }
     }
