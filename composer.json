@@ -1,16 +1,16 @@
 {
-    "name": "akiraz2/yii2-app",
-    "description": "Yii2 my advanced project template (Redis-cache, DB-queue, gentelella-admin, dektrium-user, DB-log)",
-    "keywords": ["yii2", "framework", "advanced", "project template"],
-    "homepage": "https://github.com/akiraz2/yii2-app",
+    "name": "akiraz2/yii2-seo-analysis",
+    "description": "Seo analysis. Report for seo-specialist. Control for clients.",
+    "keywords": ["yii2", "seo", "seo-tools", ""],
+    "homepage": "https://github.com/akiraz2/yii2-seo-analysis",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
-        "source": "https://github.com/akiraz2/yii2-app"
+        "source": "https://github.com/akiraz2/yii2-seo-analysis"
     },
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.1.0",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
