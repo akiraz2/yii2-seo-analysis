@@ -1,9 +1,15 @@
-# Yii2 App
+# Yii2 SEO Analysis
+SEO analysis of web-site:
+* report for seo-specialists
+* control for clients.
 
-Yii2-app is Fast and Ready-to-production advanced project template.
+Documentation:
 
-Default, the template includes three tiers: `frontend`, `backend`, and `console`, each of which is a separate Yii application.
-> **NOTE:** Template is in initial development. Anything may change at any time. 
+* Документация на русском - [README-RU](README_RU.md)
+* *English docs are not ready*
+
+App "Yii2 SEO Analysis" is based on template [akiraz2/yii2-app](https://github.com/akiraz2/yii2-app)
+
 
 ## Features
 * Admin template: [yiister/yii2-gentelella](https://github.com/yiister/yii2-gentelella), [Demo](https://colorlib.com/polygon/gentelella/)
