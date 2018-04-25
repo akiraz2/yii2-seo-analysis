@@ -1,7 +1,7 @@
 {
     "name": "akiraz2/yii2-seo-analysis",
     "description": "Seo analysis. Report for seo-specialist. Control for clients.",
-    "keywords": ["yii2", "seo", "seo-tools", ""],
+    "keywords": ["yii2", "seo", "seo-tools", "yii2-app", "seo-analysis", "seo-report", "seo-analytic"],
     "homepage": "https://github.com/akiraz2/yii2-seo-analysis",
     "type": "project",
     "license": "BSD-3-Clause",
