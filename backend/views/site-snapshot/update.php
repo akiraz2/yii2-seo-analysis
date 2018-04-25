@@ -7,15 +7,15 @@ use yii\helpers\Html;
  * @var common\models\SiteSnapshot $model
  */
 
-$this->title = Yii::t('app-backend', 'Site Snapshot');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app-backend', 'Site Snapshot'), 'url' => ['index']];
+$this->title = Yii::t('app-model', 'Site Snapshot');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app-model', 'Site Snapshot'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app-model', 'Edit');
 ?>
 <div class="giiant-crud site-snapshot-update">
 
     <h1>
-        <?= Yii::t('app-backend', 'Site Snapshot') ?>
+        <?= Yii::t('app-model', 'Site Snapshot') ?>
         <small>
             <?= $model->name ?>
         </small>

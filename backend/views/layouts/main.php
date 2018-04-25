@@ -47,8 +47,8 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                         <img src="/img/128x128.png" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
-                        <span><?= \Yii::t('app-backend', 'Welcome'); ?>,</span>
-                        <h2><?= (Yii::$app->user->isGuest) ? \Yii::t('app-backend',
+                        <span><?= \Yii::t('app-model', 'Welcome'); ?>,</span>
+                        <h2><?= (Yii::$app->user->isGuest) ? \Yii::t('app-model',
                                 'Guest') : Yii::$app->user->identity->username; ?></h2>
                     </div>
                 </div>
@@ -60,26 +60,31 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                     <div class="menu_section">
-                        <h3><?= \Yii::t('app-backend', 'General'); ?></h3>
+                        <h3><?= \Yii::t('app-model', 'General'); ?></h3>
                         <?=
                         \yiister\gentelella\widgets\Menu::widget(
                             [
                                 "items" => [
-                                    ["label" => \Yii::t('app-backend', 'Dashboard'), "url" => "/", "icon" => "home"],
+                                    ["label" => \Yii::t('app-model', 'Dashboard'), "url" => "/", "icon" => "home"],
                                     [
                                         "label" => \Yii::t('app-model', 'Site Project'),
                                         "url" => ["/site-project/index"],
-                                        "icon" => "users"
+                                        "icon" => "cube"
                                     ],
                                     [
                                         "label" => \Yii::t('app-model', 'Site Snapshot'),
                                         "url" => ["/site-snapshot/index"],
-                                        "icon" => "users"
+                                        "icon" => "cubes"
                                     ],
                                     [
                                         "label" => \Yii::t('app-model', 'Site Page'),
                                         "url" => ["/site-page/index"],
-                                        "icon" => "users"
+                                        "icon" => "files-o"
+                                    ],
+                                    [
+                                        "label" => \Yii::t('app-model', 'Site Logs'),
+                                        "url" => ["/site-log/index"],
+                                        "icon" => "history"
                                     ],
                                     [
                                         "label" => \Yii::t('app-model', 'Users'),
@@ -92,7 +97,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                         "icon" => "envelope"
                                     ],
                                     [
-                                        "label" => \Yii::t('app-backend', 'Admin'),
+                                        "label" => \Yii::t('app-model', 'Admin'),
                                         "url" => "#",
                                         "icon" => "cog",
                                         "items" => [
@@ -150,7 +155,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
                                 <img src="/img/128x128.png"
-                                     alt=""><?= (Yii::$app->user->isGuest) ? \Yii::t('app-backend',
+                                     alt=""><?= (Yii::$app->user->isGuest) ? \Yii::t('app-model',
                                     'Guest') : Yii::$app->user->identity->username; ?>
                                 <span class=" fa fa-angle-down"></span>
                             </a>

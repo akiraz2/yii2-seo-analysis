@@ -17,10 +17,14 @@ class SiteChecker
 
     public $url;
 
+    /**
+     * SiteChecker constructor.
+     * @param $url
+     */
     public function __construct($url)
     {
         $guzzle_client = new Client([
-            'timeout' => 30,
+            'timeout' => 10,
             'verify' => false // ssl cert
         ]);
         $this->client = $guzzle_client;
@@ -32,7 +36,10 @@ class SiteChecker
      */
     public function sendRequest()
     {
-        $response = [];
+        $response = [
+            'code' => 0,
+            'message' => ''
+        ];
         try {
             $content = $this->client->request('GET', $this->url, [
                 //'debug' => true,

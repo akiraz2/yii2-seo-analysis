@@ -10,7 +10,7 @@ use yii\grid\GridView;
  * @var backend\models\SiteSnapshotSearch $searchModel
  */
 
-$this->title = Yii::t('app-backend', 'Site Snapshots');
+$this->title = Yii::t('app-model', 'Site Snapshots');
 $this->params['breadcrumbs'][] = $this->title;
 
 if (isset($actionColumnTemplates)) {
@@ -38,7 +38,7 @@ $actionColumnTemplateString = '<div class="action-buttons">' . $actionColumnTemp
     ]) ?>
 
     <h1>
-        <?= Yii::t('app-backend', 'Site Snapshots') ?>
+        <?= Yii::t('app-model', 'Site Snapshots') ?>
         <small>
             List
         </small>
@@ -67,22 +67,22 @@ $actionColumnTemplateString = '<div class="action-buttons">' . $actionColumnTemp
                         'items' => [
                             [
                                 'url' => ['site-log/index'],
-                                'label' => '<i class="glyphicon glyphicon-arrow-right"></i> ' . Yii::t('app-backend',
+                                'label' => '<i class="glyphicon glyphicon-arrow-right"></i> ' . Yii::t('app-model',
                                         'Site Log'),
                             ],
                             [
                                 'url' => ['site-page/index'],
-                                'label' => '<i class="glyphicon glyphicon-arrow-right"></i> ' . Yii::t('app-backend',
+                                'label' => '<i class="glyphicon glyphicon-arrow-right"></i> ' . Yii::t('app-model',
                                         'Site Page'),
                             ],
                             [
                                 'url' => ['site-project/index'],
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"></i> ' . Yii::t('app-backend',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"></i> ' . Yii::t('app-model',
                                         'Site Project'),
                             ],
                             [
                                 'url' => ['user/index'],
-                                'label' => '<i class="glyphicon glyphicon-arrow-left"></i> ' . Yii::t('app-backend',
+                                'label' => '<i class="glyphicon glyphicon-arrow-left"></i> ' . Yii::t('app-model',
                                         'User'),
                             ],
 

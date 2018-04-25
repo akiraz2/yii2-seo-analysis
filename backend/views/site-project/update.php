@@ -7,15 +7,15 @@ use yii\helpers\Html;
  * @var common\models\SiteProject $model
  */
 
-$this->title = Yii::t('app-backend', 'Site Project');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app-backend', 'Site Project'), 'url' => ['index']];
+$this->title = Yii::t('app-model', 'Site Project');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app-model', 'Site Project'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app-model', 'Edit');
 ?>
 <div class="giiant-crud site-project-update">
 
     <h1>
-        <?= Yii::t('app-backend', 'Site Project') ?>
+        <?= Yii::t('app-model', 'Site Project') ?>
         <small>
             <?= $model->name ?>
         </small>

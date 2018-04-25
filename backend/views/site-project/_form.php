@@ -72,7 +72,7 @@ use yii\helpers\StringHelper;
                 'encodeLabels' => false,
                 'items' => [
                     [
-                        'label' => Yii::t('app-backend', 'SiteProject'),
+                        'label' => Yii::t('app-model', 'SiteProject'),
                         'content' => $this->blocks['main'],
                         'active' => true,
                     ],

@@ -10,7 +10,7 @@ use yii\widgets\ListView;
  * @var backend\models\SiteProject $searchModel
  */
 
-$this->title = Yii::t('app-backend', 'Site Projects');
+$this->title = Yii::t('app-model', 'Site Projects');
 $this->params['breadcrumbs'][] = $this->title;
 
 if (isset($actionColumnTemplates)) {
@@ -29,6 +29,7 @@ $actionColumnTemplateString = '<div class="action-buttons">' . $actionColumnTemp
             <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app-model', 'New'), ['create'],
                 ['class' => 'btn btn-success']) ?>
         </div>
+
     </div>
 
 
@@ -36,11 +37,11 @@ $actionColumnTemplateString = '<div class="action-buttons">' . $actionColumnTemp
     //echo $this->render('_search', ['model' => $searchModel]);
     ?>
 
-
-    <?= ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => '_item',
-    ]); ?>
-
-
+    <div class="row">
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'itemOptions' => ['class' => 'col-md-4'],
+            'itemView' => '_item',
+        ]); ?>
+    </div>
+</div>

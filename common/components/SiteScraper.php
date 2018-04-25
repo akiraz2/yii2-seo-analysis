@@ -203,7 +203,7 @@ class SiteScraper extends Component
 
         if ($this->client->getResponse()->getStatus() == 404) {
             $this->snapshot->updateCounters(['error404' => 1]);
-            $message = \Yii::t('app-backend', 'Error: {code}, Url: {url}', [
+            $message = \Yii::t('app-model', 'Error: {code}, Url: {url}', [
                 'code' => 404,
                 'url' => $url
             ]);
@@ -212,7 +212,7 @@ class SiteScraper extends Component
 
         if ($this->client->getResponse()->getStatus() >= 500) {
             $this->snapshot->updateCounters(['error500' => 1]);
-            $message = \Yii::t('app-backend', 'Error: {code}, Url: {url}', [
+            $message = \Yii::t('app-model', 'Error: {code}, Url: {url}', [
                 'code' => $this->client->getResponse()->getStatus(),
                 'url' => $url
             ]);
@@ -221,7 +221,7 @@ class SiteScraper extends Component
 
         if ($this->client->getResponse()->getStatus() >= 300 && $this->client->getResponse()->getStatus() < 400) {
             $this->snapshot->updateCounters(['redirect300' => 1]);
-            $message = \Yii::t('app-backend', 'Redirect: {code}, Url: {url}', [
+            $message = \Yii::t('app-model', 'Redirect: {code}, Url: {url}', [
                 'code' => $this->client->getResponse()->getStatus(),
                 'url' => $url
             ]);

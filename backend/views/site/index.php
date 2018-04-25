@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = \Yii::t('app-backend', 'Dashboard');
+$this->title = \Yii::t('app-model', 'Dashboard');
 ?>
 <div class="site-index">
     <div class="row tile_count">

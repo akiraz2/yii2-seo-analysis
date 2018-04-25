@@ -13,8 +13,8 @@ use dmstr\bootstrap\Tabs;
  */
 $copyParams = $model->attributes;
 
-$this->title = Yii::t('app-backend', 'Site Snapshot');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app-backend', 'Site Snapshots'), 'url' => ['index']];
+$this->title = Yii::t('app-model', 'Site Snapshot');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app-model', 'Site Snapshots'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app-model', 'View');
 ?>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = Yii::t('app-model', 'View');
     <?php endif; ?>
 
     <h1>
-        <?= Yii::t('app-backend', 'Site Snapshot') ?>
+        <?= Yii::t('app-model', 'Site Snapshot') ?>
         <small>
             <?= $model->name ?>
         </small>

@@ -2,7 +2,10 @@
 
 namespace backend\controllers;
 
+use common\models\SiteProject;
 use Yii;
+use yii\db\Exception;
+use yii\db\Expression;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -60,6 +63,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $site_projects = SiteProject::find()->where([
+            '>=',
+            'ping',
+            \Yii::$app->params['pingMinDelay']
+        ])
+            ->andWhere(['<', '(`ping_last_date`+`ping`)', new Expression('UNIX_TIMESTAMP()')])
+            ->active()->all();
         return $this->render('index');
     }
 

@@ -65,7 +65,7 @@ use yii\helpers\StringHelper;
                 'encodeLabels' => false,
                 'items' => [
                     [
-                        'label' => Yii::t('app-backend', 'SiteSnapshot'),
+                        'label' => Yii::t('app-model', 'SiteSnapshot'),
                         'content' => $this->blocks['main'],
                         'active' => true,
                     ],
