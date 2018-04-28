@@ -3,6 +3,7 @@
 namespace console\controllers;
 
 use common\components\SiteScraper;
+use common\models\SiteSnapshot;
 use yii\console\Controller;
 
 /**
@@ -14,13 +15,12 @@ class ScraperController extends Controller
 
     /**
      * @param $id
+     * @throws \yii\db\Exception
      */
     public function actionIndex($id)
     {
-        $scraper = new SiteScraper();
-        $scraper->startUrl = 'https://teaera.ru/';
-        $scraper->snapshotId = $id;
-
-        $scraper->start();
+        \Yii::$app->db->createCommand('SET SESSION wait_timeout = 28800;')->execute();
+        $snapshot= SiteSnapshot::findOne($id);
+        $snapshot->startScraping();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\components\SiteScraper;
 use common\jobs\SiteScraperJob;
 use Yii;
 use common\models\SiteSnapshot;
@@ -15,20 +16,6 @@ use yii\filters\VerbFilter;
  */
 class SiteSnapshotController extends BaseAdminController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all SiteSnapshot models.
@@ -67,7 +54,7 @@ class SiteSnapshotController extends BaseAdminController
     {
         $model = new SiteSnapshot();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->get()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -122,13 +109,39 @@ class SiteSnapshotController extends BaseAdminController
     {
         $model = $this->findModel($id);
 
-        $queue = Yii::$app->queue;
+        $model->start();
+
+        /*$queue = Yii::$app->queue;
         $queue->push(new SiteScraperJob([
             'id' => $id
         ]));
 
-        Yii::$app->session->setFlash('success', 'Добавлено в очередь');
+        Yii::$app->session->setFlash('success', 'Добавлено в очередь');*/
 
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionStop($id) {
+        $model = $this->findModel($id);
+        $model->updateAttributes(['cmd' => SiteScraper::CMD_STOP]);
+        Yii::$app->session->setFlash('success', 'Задача вскоре остановится');
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionPause($id) {
+        $model = $this->findModel($id);
+        $model->updateAttributes(['cmd' => SiteScraper::CMD_PAUSE]);
+        Yii::$app->session->setFlash('success', 'Задача вскоре поставится на паузу');
         return $this->redirect(['index']);
     }
 

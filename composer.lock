@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bc399df16325752a57a50df4d42decf",
+    "content-hash": "55d9f4fa154355a30eff795e4393fc8e",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -69,7 +69,7 @@
             "version": "v3.3.7",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "0b9c4a4007c44201dce9a6cc1a38407005c26c86"
             },
             "dist": {
@@ -413,12 +413,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dektrium/yii2-user.git",
-                "reference": "8f2daea532f7efefc3f808e50d74a91c0de71ff4"
+                "reference": "c8f671da817fef2accfe8f419acf4b1888c8e573"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dektrium/yii2-user/zipball/8f2daea532f7efefc3f808e50d74a91c0de71ff4",
-                "reference": "8f2daea532f7efefc3f808e50d74a91c0de71ff4",
+                "url": "https://api.github.com/repos/dektrium/yii2-user/zipball/c8f671da817fef2accfe8f419acf4b1888c8e573",
+                "reference": "c8f671da817fef2accfe8f419acf4b1888c8e573",
                 "shasum": ""
             },
             "require": {
@@ -464,7 +464,7 @@
                 "yii2",
                 "yii2-user"
             ],
-            "time": "2018-04-03T12:24:41+00:00"
+            "time": "2018-04-24 19:36:39"
         },
         {
             "name": "dmstr/yii2-bootstrap",
@@ -1252,12 +1252,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ignatenkovnikita/yii2-queuemanager.git",
-                "reference": "38b2a4f276e25182fba964536c9bdd3cf4d68da1"
+                "reference": "c23cc040df9ddc98bff612294638fa611d315a71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ignatenkovnikita/yii2-queuemanager/zipball/38b2a4f276e25182fba964536c9bdd3cf4d68da1",
-                "reference": "38b2a4f276e25182fba964536c9bdd3cf4d68da1",
+                "url": "https://api.github.com/repos/ignatenkovnikita/yii2-queuemanager/zipball/c23cc040df9ddc98bff612294638fa611d315a71",
+                "reference": "c23cc040df9ddc98bff612294638fa611d315a71",
                 "shasum": ""
             },
             "require": {
@@ -1287,7 +1287,55 @@
                 "queue",
                 "yii2"
             ],
-            "time": "2018-04-15T12:34:22+00:00"
+            "time": "2018-04-23 11:12:24"
+        },
+        {
+            "name": "insolita/yii2-migration-generator",
+            "version": "2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Insolita/yii2-migrik.git",
+                "reference": "455c8dfc035085d56051a16b3cfc5f010662170d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Insolita/yii2-migrik/zipball/455c8dfc035085d56051a16b3cfc5f010662170d",
+                "reference": "455c8dfc035085d56051a16b3cfc5f010662170d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "nesbot/carbon": "*",
+                "vlucas/phpdotenv": "*",
+                "yiisoft/yii2-gii": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "insolita\\migrik\\Bootstrap"
+            },
+            "autoload": {
+                "psr-4": {
+                    "insolita\\migrik\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "insolita",
+                    "email": "donnainsolita@gmail.com"
+                }
+            ],
+            "description": "Set of gii tools for generating  files for migration by schema of table , phpdoc or table data",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2017-04-29T12:37:47+00:00"
         },
         {
             "name": "mikehaertl/php-shellcommand",
@@ -1744,16 +1792,16 @@
         },
         {
             "name": "schmunk42/yii2-giiant",
-            "version": "0.10.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmunk42/yii2-giiant.git",
-                "reference": "ba9db7865945b2c5543bca9f6fe4414a09f6500f"
+                "reference": "e4ceda39a6967bfc57fc5542864906b28fd84353"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmunk42/yii2-giiant/zipball/ba9db7865945b2c5543bca9f6fe4414a09f6500f",
-                "reference": "ba9db7865945b2c5543bca9f6fe4414a09f6500f",
+                "url": "https://api.github.com/repos/schmunk42/yii2-giiant/zipball/e4ceda39a6967bfc57fc5542864906b28fd84353",
+                "reference": "e4ceda39a6967bfc57fc5542864906b28fd84353",
                 "shasum": ""
             },
             "require": {
@@ -1804,7 +1852,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2018-04-20T13:17:12+00:00"
+            "time": "2018-04-27 09:47:38"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3229,16 +3277,16 @@
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-swiftmailer.git",
-                "reference": "563570c9aa19ca47c1b22e3032983229378e9274"
+                "reference": "fd917fbe63b7ea796c52902143b83b98e65bfb73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/563570c9aa19ca47c1b22e3032983229378e9274",
-                "reference": "563570c9aa19ca47c1b22e3032983229378e9274",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/fd917fbe63b7ea796c52902143b83b98e65bfb73",
+                "reference": "fd917fbe63b7ea796c52902143b83b98e65bfb73",
                 "shasum": ""
             },
             "require": {
@@ -3248,12 +3296,12 @@
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "yii\\swiftmailer\\": ""
+                    "yii\\swiftmailer\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3275,7 +3323,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2017-08-04T10:48:17+00:00"
+            "time": "2018-04-24T23:17:42+00:00"
         },
         {
             "name": "yiister/yii2-gentelella",
@@ -5259,12 +5307,12 @@
     "stability-flags": {
         "dektrium/yii2-user": 20,
         "ignatenkovnikita/yii2-queuemanager": 20,
-        "schmunk42/yii2-giiant": 0
+        "schmunk42/yii2-giiant": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0.0"
+        "php": ">=7.1.0"
     },
     "platform-dev": []
 }

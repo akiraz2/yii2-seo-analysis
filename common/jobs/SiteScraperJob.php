@@ -2,6 +2,7 @@
 
 namespace common\jobs;
 
+use common\models\SiteSnapshot;
 use yii\base\BaseObject;
 
 /**
@@ -17,6 +18,7 @@ class SiteScraperJob extends BaseObject implements \yii\queue\JobInterface
      */
     public function execute($queue)
     {
-
+        $snapshot= SiteSnapshot::findOne($this->snapshotId);
+        $snapshot->startScraping();
     }
 }

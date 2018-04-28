@@ -5,15 +5,14 @@
 namespace common\models\base;
 
 use Yii;
-use yii\behaviors\BlameableBehavior;
 
 /**
  * This is the base-model class for table "site_snapshot".
  *
  * @property integer $id
  * @property integer $site_project_id
- * @property string $name
- * @property string $start_url
+ * @property integer $status
+ * @property integer $cmd
  * @property integer $count_pages
  * @property string $robots_txt
  * @property string $sitemap_xml
@@ -22,12 +21,10 @@ use yii\behaviors\BlameableBehavior;
  * @property integer $redirect300
  * @property integer $duplicates
  * @property string $created_at
- * @property integer $user_id
  *
  * @property \common\models\SiteLog[] $siteLogs
  * @property \common\models\SitePage[] $sitePages
  * @property \common\models\SiteProject $siteProject
- * @property \common\models\User $user
  * @property string $aliasModel
  */
 abstract class SiteSnapshot extends \yii\db\ActiveRecord
@@ -54,42 +51,20 @@ abstract class SiteSnapshot extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'user_id',
-                'updatedByAttribute' => false,
-            ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
             [['site_project_id', 'count_pages', 'error404', 'error500', 'redirect300', 'duplicates'], 'integer'],
-            [['name', 'start_url'], 'required'],
             [['robots_txt'], 'string'],
             [['created_at'], 'safe'],
-            [['name'], 'string', 'max' => 100],
-            [['start_url', 'sitemap_xml'], 'string', 'max' => 255],
+            [['status', 'cmd'], 'string', 'max' => 4],
+            [['sitemap_xml'], 'string', 'max' => 255],
             [
                 ['site_project_id'],
                 'exist',
                 'skipOnError' => true,
                 'targetClass' => \common\models\SiteProject::className(),
                 'targetAttribute' => ['site_project_id' => 'id']
-            ],
-            [
-                ['user_id'],
-                'exist',
-                'skipOnError' => true,
-                'targetClass' => \common\models\User::className(),
-                'targetAttribute' => ['user_id' => 'id']
             ]
         ];
     }
@@ -102,9 +77,8 @@ abstract class SiteSnapshot extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app-model', 'ID'),
             'site_project_id' => Yii::t('app-model', 'Site Project ID'),
-            'user_id' => Yii::t('app-model', 'User ID'),
-            'name' => Yii::t('app-model', 'Name'),
-            'start_url' => Yii::t('app-model', 'Start Url'),
+            'status' => Yii::t('app-model', 'Status'),
+            'cmd' => Yii::t('app-model', 'Cmd'),
             'count_pages' => Yii::t('app-model', 'Count Pages'),
             'robots_txt' => Yii::t('app-model', 'Robots Txt'),
             'sitemap_xml' => Yii::t('app-model', 'Sitemap Xml'),
@@ -138,14 +112,6 @@ abstract class SiteSnapshot extends \yii\db\ActiveRecord
     public function getSiteProject()
     {
         return $this->hasOne(\common\models\SiteProject::className(), ['id' => 'site_project_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(\common\models\User::className(), ['id' => 'user_id']);
     }
 
 

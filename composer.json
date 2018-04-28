@@ -23,7 +23,8 @@
         "yiisoft/yii2-jui": "^2.0",
         "fabpot/goutte": "^3.2",
         "guzzlehttp/guzzle": "~6.0",
-        "schmunk42/yii2-giiant": "@stable"
+        "schmunk42/yii2-giiant": "dev-master",
+        "insolita/yii2-migration-generator": "~2.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

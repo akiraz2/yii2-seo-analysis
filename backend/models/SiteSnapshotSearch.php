@@ -19,7 +19,6 @@ class SiteSnapshotSearch extends SiteSnapshot
     {
         return [
             [['id'], 'integer'],
-            [['name', 'start_url', 'created_at'], 'safe'],
         ];
     }
 
@@ -62,9 +61,6 @@ class SiteSnapshotSearch extends SiteSnapshot
             'id' => $this->id,
             'created_at' => $this->created_at,
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'start_url', $this->start_url]);
 
         return $dataProvider;
     }

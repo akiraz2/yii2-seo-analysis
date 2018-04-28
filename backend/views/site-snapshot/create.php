@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1>
         <?= Yii::t('app-model', 'Site Snapshot') ?>
         <small>
-            <?= $model->name ?>
+            <?= $model->id ?>
         </small>
     </h1>
 

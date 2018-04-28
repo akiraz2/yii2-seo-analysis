@@ -1,11 +1,9 @@
 <?php
 
+use dmstr\bootstrap\Tabs;
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
-use dmstr\bootstrap\Tabs;
 
 /**
  * @var yii\web\View $this
@@ -45,16 +43,13 @@ $this->params['breadcrumbs'][] = Yii::t('app-model', 'View');
                 '<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('app-model', 'Edit'),
                 ['update', 'id' => $model->id],
                 ['class' => 'btn btn-info']) ?>
-
-            <?= Html::a(
-                '<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('app-model', 'Copy'),
-                ['create', 'id' => $model->id, 'SiteProject' => $copyParams],
-                ['class' => 'btn btn-success']) ?>
-
-            <?= Html::a(
-                '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app-model', 'New'),
-                ['create'],
-                ['class' => 'btn btn-success']) ?>
+            <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('app-model', 'Delete'),
+                ['delete', 'id' => $model->id],
+                [
+                    'class' => 'btn btn-danger',
+                    'data-confirm' => '' . Yii::t('app-model', 'Are you sure to delete this item?') . '',
+                    'data-method' => 'post',
+                ]); ?>
         </div>
 
         <div class="pull-right">
@@ -76,25 +71,84 @@ $this->params['breadcrumbs'][] = Yii::t('app-model', 'View');
             'base_url:url',
             'ping',
             'reindex',
+            'ping_last_date:datetime',
             'params:ntext',
-            'created_at',
-            'updated_at',
-            'status',
+            'Status',
         ],
     ]); ?>
 
 
     <hr/>
 
-    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('app-model', 'Delete'),
-        ['delete', 'id' => $model->id],
-        [
-            'class' => 'btn btn-danger',
-            'data-confirm' => '' . Yii::t('app-model', 'Are you sure to delete this item?') . '',
-            'data-method' => 'post',
-        ]); ?>
     <?php $this->endBlock(); ?>
 
+    <?php $this->beginBlock('SiteSnapshots'); ?>
+    <div style='position: relative'>
+        <div style='position:absolute; right: 0px; top: 0px;'>
+            <?= Html::a(
+                '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app-model', 'List All') . ' Site Snapshots',
+                ['site-snapshot/index'],
+                ['class' => 'btn text-muted btn-xs']
+            ) ?>
+            <?= Html::a(
+                '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app-model', 'New') . ' Site Snapshot',
+                ['site-snapshot/create', 'SiteSnapshot' => ['site_project_id' => $model->id]],
+                ['class' => 'btn btn-success btn-xs']
+            ); ?>
+        </div>
+    </div>
+    <?php Pjax::begin([
+        'id' => 'pjax-SiteSnapshots',
+        'enableReplaceState' => false,
+        'linkSelector' => '#pjax-SiteSnapshots ul.pagination a, th a'
+    ]) ?>
+    <?=
+    '<div class="table-responsive">'
+    . \yii\grid\GridView::widget([
+        'layout' => '{summary}{pager}<br/>{items}{pager}',
+        'dataProvider' => new \yii\data\ActiveDataProvider([
+            'query' => $model->getSiteSnapshots(),
+            'pagination' => [
+                'pageSize' => 20,
+                'pageParam' => 'page-sitesnapshots',
+            ]
+        ]),
+        'pager' => [
+            'class' => yii\widgets\LinkPager::className(),
+            'firstPageLabel' => Yii::t('app-model', 'First'),
+            'lastPageLabel' => Yii::t('app-model', 'Last')
+        ],
+        'columns' => [
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update}',
+                'contentOptions' => ['nowrap' => 'nowrap'],
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    // using the column name as key, not mapping to 'id' like the standard generator
+                    $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string)$key];
+                    $params[0] = 'site-snapshot' . '/' . $action;
+                    $params['SiteSnapshot'] = ['site_project_id' => $model->primaryKey()[0]];
+                    return $params;
+                },
+                'buttons' => [
+
+                ],
+                'controller' => 'site-snapshot'
+            ],
+            'id',
+            'count_pages',
+            //'robots_txt:ntext',
+            'sitemap_xml',
+            'error404',
+            'error500',
+            'redirect300',
+            'duplicates',
+        ]
+    ])
+    . '</div>'
+    ?>
+    <?php Pjax::end() ?>
+    <?php $this->endBlock() ?>
 
 
     <?php $this->beginBlock('SiteLogs'); ?>
@@ -157,7 +211,7 @@ $this->params['breadcrumbs'][] = Yii::t('app-model', 'View');
                 'attribute' => 'site_snapshot_id',
                 'value' => function ($model) {
                     if ($rel = $model->siteSnapshot) {
-                        return Html::a($rel->name, ['site-snapshot/view', 'id' => $rel->id,], ['data-pjax' => 0]);
+                        return Html::a($rel->id, ['site-snapshot/view', 'id' => $rel->id,], ['data-pjax' => 0]);
                     } else {
                         return '';
                     }
@@ -175,86 +229,7 @@ $this->params['breadcrumbs'][] = Yii::t('app-model', 'View');
     <?php $this->endBlock() ?>
 
 
-    <?php $this->beginBlock('SiteSnapshots'); ?>
-    <div style='position: relative'>
-        <div style='position:absolute; right: 0px; top: 0px;'>
-            <?= Html::a(
-                '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('app-model', 'List All') . ' Site Snapshots',
-                ['site-snapshot/index'],
-                ['class' => 'btn text-muted btn-xs']
-            ) ?>
-            <?= Html::a(
-                '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('app-model', 'New') . ' Site Snapshot',
-                ['site-snapshot/create', 'SiteSnapshot' => ['site_project_id' => $model->id]],
-                ['class' => 'btn btn-success btn-xs']
-            ); ?>
-        </div>
-    </div>
-    <?php Pjax::begin([
-        'id' => 'pjax-SiteSnapshots',
-        'enableReplaceState' => false,
-        'linkSelector' => '#pjax-SiteSnapshots ul.pagination a, th a'
-    ]) ?>
-    <?=
-    '<div class="table-responsive">'
-    . \yii\grid\GridView::widget([
-        'layout' => '{summary}{pager}<br/>{items}{pager}',
-        'dataProvider' => new \yii\data\ActiveDataProvider([
-            'query' => $model->getSiteSnapshots(),
-            'pagination' => [
-                'pageSize' => 20,
-                'pageParam' => 'page-sitesnapshots',
-            ]
-        ]),
-        'pager' => [
-            'class' => yii\widgets\LinkPager::className(),
-            'firstPageLabel' => Yii::t('app-model', 'First'),
-            'lastPageLabel' => Yii::t('app-model', 'Last')
-        ],
-        'columns' => [
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update}',
-                'contentOptions' => ['nowrap' => 'nowrap'],
-                'urlCreator' => function ($action, $model, $key, $index) {
-                    // using the column name as key, not mapping to 'id' like the standard generator
-                    $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string)$key];
-                    $params[0] = 'site-snapshot' . '/' . $action;
-                    $params['SiteSnapshot'] = ['site_project_id' => $model->primaryKey()[0]];
-                    return $params;
-                },
-                'buttons' => [
 
-                ],
-                'controller' => 'site-snapshot'
-            ],
-            'id',
-// generated by schmunk42\giiant\generators\crud\providers\core\RelationProvider::columnFormat
-            [
-                'class' => yii\grid\DataColumn::className(),
-                'attribute' => 'user_id',
-                'value' => function ($model) {
-                    if ($rel = $model->user) {
-                        return Html::a($rel->id, ['user/view', 'id' => $rel->id,], ['data-pjax' => 0]);
-                    } else {
-                        return '';
-                    }
-                },
-                'format' => 'raw',
-            ],
-            'name',
-            'start_url:url',
-            'count_pages',
-            'robots_txt:ntext',
-            'sitemap_xml',
-            'error404',
-            'error500',
-        ]
-    ])
-    . '</div>'
-    ?>
-    <?php Pjax::end() ?>
-    <?php $this->endBlock() ?>
 
 
     <?= Tabs::widget(
@@ -263,18 +238,18 @@ $this->params['breadcrumbs'][] = Yii::t('app-model', 'View');
             'encodeLabels' => false,
             'items' => [
                 [
-                    'label' => '<b class=""># ' . $model->id . '</b>',
+                    'label' => $model->name.' <b class=""># ' . $model->id . '</b>',
                     'content' => $this->blocks['common\models\SiteProject'],
                     'active' => true,
                 ],
                 [
-                    'content' => $this->blocks['SiteLogs'],
-                    'label' => '<small>Site Logs <span class="badge badge-default">' . $model->getSiteLogs()->count() . '</span></small>',
+                    'content' => $this->blocks['SiteSnapshots'],
+                    'label' => '<small>Site Snapshots <span class="badge badge-default">' . $model->getSiteSnapshots()->count() . '</span></small>',
                     'active' => false,
                 ],
                 [
-                    'content' => $this->blocks['SiteSnapshots'],
-                    'label' => '<small>Site Snapshots <span class="badge badge-default">' . $model->getSiteSnapshots()->count() . '</span></small>',
+                    'content' => $this->blocks['SiteLogs'],
+                    'label' => '<small>Site Logs <span class="badge badge-default">' . $model->getSiteLogs()->count() . '</span></small>',
                     'active' => false,
                 ],
             ]

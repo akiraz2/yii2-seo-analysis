@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use common\components\SiteScraper;
+use common\components\StatusBehavior;
 use Yii;
 use \common\models\base\SiteSnapshot as BaseSiteSnapshot;
 use yii\base\Exception;
@@ -54,7 +56,7 @@ class SiteSnapshot extends BaseSiteSnapshot
      */
     public function setSitemapXml($body) {
         $filename = md5(\Yii::$app->params['sitemapSalt'] . $this->id) . '.xml';
-        $filepath = \Yii::getAlias('@backend/web/') . \Yii::$app->params['sitemapDir'] . DIRECTORY_SEPARATOR . $this->user_id . DIRECTORY_SEPARATOR;
+        $filepath = \Yii::getAlias('@backend/web/') . \Yii::$app->params['sitemapDir'] . DIRECTORY_SEPARATOR . $this->id . DIRECTORY_SEPARATOR;
 
         try {
             FileHelper::createDirectory($filepath);
@@ -64,5 +66,66 @@ class SiteSnapshot extends BaseSiteSnapshot
         } catch (Exception $exception) {
         }
         return false;
+    }
+
+    /**
+     * @return array
+     */
+    public function getStatusList() {
+        return [
+            SiteScraper::STATUS_ACTIVE => 'Active',
+            SiteScraper::STATUS_ENDED => 'Ended',
+            SiteScraper::STATUS_STOPPED => 'Stopped',
+            SiteScraper::STATUS_PAUSED => 'Paused'
+        ];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus() {
+        return $this->getStatusList()[$this->status];
+    }
+
+    /**
+     * @return array
+     */
+    public function getCmdList() {
+        return [
+            SiteScraper::CMD_ACTIVE => 'Запустить',
+            SiteScraper::CMD_STOP => 'Остановить',
+            SiteScraper::CMD_PAUSE => 'Поставить на паузу',
+        ];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCmd() {
+        return $this->getCmdList()[$this->cmd];
+    }
+
+    /**
+     * @return int
+     */
+    public function start() {
+        return $this->updateAttributes(['cmd' => SiteScraper::CMD_ACTIVE]);
+    }
+
+    /**
+     * @throws \yii\base\ExitException
+     */
+    public function startScraping() {
+        $this->updateAttributes(['status' => SiteScraper::STATUS_ACTIVE]);
+        $project = $this->getSiteProject()->one();
+        $scraper = new SiteScraper();
+        $scraper->startUrl = $project->base_url;
+        $scraper->snapshotId = $this->id;
+        $scraper->cmd = function () {
+            $sn=SiteSnapshot::findOne($this->id);
+            var_dump($sn->cmd);
+            return $sn->cmd;
+        };
+        $scraper->start();
     }
 }

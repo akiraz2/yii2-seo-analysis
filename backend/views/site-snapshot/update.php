@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('app-model', 'Site Snapshot');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app-model', 'Site Snapshot'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => (string)$model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app-model', 'Edit');
 ?>
 <div class="giiant-crud site-snapshot-update">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = Yii::t('app-model', 'Edit');
     <h1>
         <?= Yii::t('app-model', 'Site Snapshot') ?>
         <small>
-            <?= $model->name ?>
+            <?= $model->id ?>
         </small>
     </h1>
 

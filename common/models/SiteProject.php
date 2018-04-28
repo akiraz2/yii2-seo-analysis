@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\components\StatusBehavior;
 use common\models\base\SiteProject as BaseSiteProject;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -12,16 +13,25 @@ use yii\helpers\ArrayHelper;
 class SiteProject extends BaseSiteProject
 {
 
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return ArrayHelper::merge(
             parent::behaviors(),
             [
                 # custom behaviors
+                [
+                    'class' => StatusBehavior::class
+                ],
             ]
         );
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return ArrayHelper::merge(
@@ -43,4 +53,13 @@ class SiteProject extends BaseSiteProject
             ]
         );
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLastSnapshot()
+    {
+        return $this->hasOne(\common\models\SiteSnapshot::className(), ['site_project_id' => 'id'])->limit(1)->orderBy(['created_at' => SORT_DESC]);
+    }
+
 }

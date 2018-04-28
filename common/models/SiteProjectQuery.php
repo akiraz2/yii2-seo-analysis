@@ -15,6 +15,7 @@ class SiteProjectQuery extends \yii\db\ActiveQuery
         return $this;
     }
 
+    //public function get
     /**
      * @inheritdoc
      * @return SiteProject[]|array

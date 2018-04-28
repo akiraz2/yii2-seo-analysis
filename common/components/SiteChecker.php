@@ -49,17 +49,26 @@ class SiteChecker
             ]);
             if ($content->getStatusCode() == 200) {
                 $response['code'] = $content->getStatusCode();
-                $response['message'] = '';
-                return $response;
+                if($this->parseError($content->getBody())) {
+                    $response['code'] = 500;
+                    $response['message'] = 'Warning or Error has in body';
+                }
             }
         } catch (\Exception $exception) {
             \Yii::error($exception->getMessage());
             $response['code'] = $exception->getCode();
             $response['message'] = $exception->getMessage();
-            return $response;
         }
 
         return $response;
     }
 
+    /**
+     * @param $body
+     * @return bool
+     */
+    public function parseError($body) {
+        preg_match('/(warning|error)/i', $body, $matches);
+        return isset($matches[0]);
+    }
 }

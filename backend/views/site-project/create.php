@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 
 /**
- * @var yii\web\View $this
- * @var common\models\SiteProject $model
- */
+* @var yii\web\View $this
+* @var common\models\SiteProject $model
+*/
 
 $this->title = Yii::t('app-model', 'Site Project');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app-model', 'Site Projects'), 'url' => ['index']];
@@ -16,23 +16,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1>
         <?= Yii::t('app-model', 'Site Project') ?>
         <small>
-            <?= $model->name ?>
+                        <?= $model->name ?>
         </small>
     </h1>
 
     <div class="clearfix crud-navigation">
         <div class="pull-left">
-            <?= Html::a(
-                Yii::t('app-model', 'Cancel'),
-                \yii\helpers\Url::previous(),
-                ['class' => 'btn btn-default']) ?>
+            <?=             Html::a(
+            Yii::t('app-model', 'Cancel'),
+            \yii\helpers\Url::previous(),
+            ['class' => 'btn btn-default']) ?>
         </div>
     </div>
 
-    <hr/>
+    <hr />
 
     <?= $this->render('_form', [
-        'model' => $model,
+    'model' => $model,
     ]); ?>
 
 </div>

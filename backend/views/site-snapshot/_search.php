@@ -23,13 +23,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'user_id') ?>
 
-    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'count_pages') ?>
 
-    <?= $form->field($model, 'start_url') ?>
-
-    <?php // echo $form->field($model, 'count_pages') ?>
-
-    <?php // echo $form->field($model, 'robots_txt') ?>
+    <?= $form->field($model, 'robots_txt') ?>
 
     <?php // echo $form->field($model, 'sitemap_xml') ?>
 

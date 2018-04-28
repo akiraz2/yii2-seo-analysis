@@ -19,6 +19,17 @@ use yii\base\Exception;
  */
 class SiteScraper extends Component
 {
+    const CMD_ACTIVE = 1;
+    const CMD_PAUSE = 2;
+    const CMD_STOP = -1;
+
+    const STATUS_ACTIVE = 1;
+    const STATUS_PAUSED = 2;
+    const STATUS_STOPPED = 3;
+    const STATUS_ENDED = 4;
+
+    public $cmd;
+
     /** @var string $startUrl */
     public $startUrl;
 
@@ -30,15 +41,12 @@ class SiteScraper extends Component
 
     /** @var Client $client */
     private $client;
-
     /** @var array $checkedUrl list of parsed urls */
     private $checkedUrl = [];
 
     private $crawler;
-
     /** @var array $urlList url List in memory */
     private $urlList = [];
-
     /** @var SiteSnapshot $snapshot */
     private $snapshot;
 
@@ -59,20 +67,25 @@ class SiteScraper extends Component
 
     /**
      *
+     * @throws \yii\base\ExitException
      */
     public function start()
     {
         $this->checkConfig();
-        $this->saveRobotsTxt();
-        $this->saveSitemapXml();
         $this->snapshot->updateAttributes([
             'count_pages' => 0,
             'error404' => 0,
             'error500' => 0,
-            'redirect300' => 0
+            'redirect300' => 0,
+            'status' => self::STATUS_ACTIVE
         ]);//обнуляем перед стартом
+        $this->saveRobotsTxt();
+        $this->saveSitemapXml();
         $this->scrapePage($this->startUrl);
-        $this->snapshot->updateAttributes(['count_pages' => $this->countPages]);//записываем конечное число страниц
+        $this->snapshot->updateAttributes([
+            'count_pages' => $this->countPages,
+            'status' => self::STATUS_ENDED
+        ]);//записываем конечное число страниц
     }
 
     /**
@@ -101,10 +114,15 @@ class SiteScraper extends Component
             'timeout' => 30,
             'verify' => false // ssl cert
         ]);
-        $content = $guzzle_client->request('GET', $this->startUrl . '/robots.txt');
+        try {
+            $content = $guzzle_client->request('GET', $this->startUrl . '/robots.txt');
 
-        if ($content->getStatusCode() == 200) {
-            $this->snapshot->updateAttributes(['robots_txt' => $content->getBody()]);
+            if ($content->getStatusCode() == 200) {
+                $this->snapshot->updateAttributes(['robots_txt' => $content->getBody()]);
+            }
+        }
+        catch (\Exception $exception) {
+            SiteLog::create('robots-txt', $exception->getMessage(), $this->snapshotId);
         }
     }
 
@@ -132,7 +150,7 @@ class SiteScraper extends Component
                 return $this->snapshot->setSitemapXml($content->getBody());
             }
         } catch (\Exception $exception) {
-
+            SiteLog::create('sitemap-xml', $exception->getMessage(), $this->snapshotId);
         }
         return false;
     }
@@ -144,9 +162,14 @@ class SiteScraper extends Component
      *
      * @param string $url
      * @return void
+     * @throws \yii\base\ExitException
      */
     private function scrapePage(string $url): void
     {
+        if ($this->countPages % 10 == 0) {
+            $this->processCmd();
+        }
+
         $time_start = microtime(true);
         $crawler = $this->client->request('GET', $url);
         $time_end = microtime(true);
@@ -195,12 +218,53 @@ class SiteScraper extends Component
     }
 
     /**
+     * @throws \yii\base\ExitException
+     */
+    private function processCmd()
+    {
+        switch ($this->cmd()) {
+
+            case self::CMD_PAUSE:
+                $this->snapshot->updateAttributes([
+                    'status' => self::STATUS_PAUSED,
+                    'count_pages' => $this->countPages
+                ]);
+
+                for ($i = 0; $i < \Yii::$app->params['maxPause']; $i++) {
+                    sleep(\Yii::$app->params['pauseScraping']);
+                    if ($this->cmd() != self::CMD_PAUSE) {
+                        break;
+                    }
+                }
+
+                $this->snapshot->updateAttributes(['status' => self::STATUS_ACTIVE, 'cmd' => self::CMD_ACTIVE]);
+
+                //break;
+
+            case self::CMD_STOP:
+                $this->snapshot->updateAttributes(['status' => self::STATUS_ENDED, 'cmd' => self::CMD_STOP]);
+                \Yii::$app->end();
+                break;
+        }
+    }
+
+    /**
+     * @return int|mixed
+     */
+    public function cmd()
+    {
+        if (!empty($this->cmd)) {
+            return call_user_func($this->cmd, $this);
+        }
+        return $this->cmd;
+    }
+
+    /**
      * Update site-snapshot`s counters error 404, 500, 300
      * @param string $url
      */
     private function updateStatusCode(string $url = '')
     {
-
         if ($this->client->getResponse()->getStatus() == 404) {
             $this->snapshot->updateCounters(['error404' => 1]);
             $message = \Yii::t('app-model', 'Error: {code}, Url: {url}', [
